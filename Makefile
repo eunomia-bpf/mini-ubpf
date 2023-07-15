@@ -33,10 +33,6 @@ help:
 test-core: build
 	cd build/ && ctest -VV
 
-test-runtime: build-runtime
-	make -C example/bpf
-	cd build/ && ctest -VV
-
 test: ## run tests quickly with pytest on x86, you need to build first
 	pytest -v -s test/test_framework
 
@@ -60,11 +56,6 @@ build-all: build-all build-arm32 build-arm64
 build: ## build the package
 	rm -rf build/
 	cmake -Bbuild  -Dlibebpf_ENABLE_UNIT_TESTING=1
-	cmake --build build --config Debug
-
-build-runtime: ## build the package bpftime
-	rm -rf build/
-	cmake -Bbuild -Dlibebpf_ENABLE_UNIT_TESTING=1 -Dlibebpf_ENABLE_EXTENSION=1 
 	cmake --build build --config Debug
 
 build-arm32: ## build the package on arm32

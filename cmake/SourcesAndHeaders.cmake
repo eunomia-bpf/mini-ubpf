@@ -47,33 +47,8 @@ else()
   message(FATAL_ERROR "Unsupported architecture")
 endif()
 
-if(${PROJECT_NAME}_ENABLE_EXTENSION)
-  set(EXT_SOURCE 
-    runtime/src/hook.c
-    runtime/src/relo.c
-    runtime/src/trace.c
-    runtime/src/extension.c
-    runtime/src/sym_addr.c
-    runtime/src/find_func.c
-    )
-  set(EXT_HEADERS
-    runtime/include/
-  )
-  set(EXT_TESTS
-    src/test_relo.c
-    src/test_ffi.c
-    src/test_hook.c
-    src/test_patch.c
-    src/test_set_ffi_func.c
-    src/test_find_func_addr.c
-    src/test_ffi_register.c
-    # runtime/test/test_func_addr.c
-  )
-endif()
-
 set(sources
   ${ARCH_SOURCES}
-  ${EXT_SOURCE}
   core/ebpf_jit.c
   core/ebpf_vm.c
   core/linux_bpf_core.c
@@ -88,7 +63,6 @@ set(headers
     include/
     core/
     ${ARCH_HEADERS}
-    ${EXT_HEADERS}
     ${headerfiles}
 )
 message(STATUS ${headers})
